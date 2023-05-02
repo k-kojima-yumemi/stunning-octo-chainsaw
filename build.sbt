@@ -6,3 +6,5 @@ lazy val pro = (project in file("."))
     name := "compile-check"
   )
 
+Compile / packageBin / mainClass := Some("jp.co.yumemi.koma.CompileCheckMain")
+Compile / run / mainClass := Some("jp.co.yumemi.koma.CompileCheckMain")
