@@ -1,5 +1,6 @@
 ThisBuild / scalaVersion := "2.13.10"
 ThisBuild / organization := "jp.co.yumemi.koma"
+compileOrder := CompileOrder.Mixed
 
 lazy val pro = (project in file("."))
   .settings(

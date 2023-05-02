@@ -6,6 +6,10 @@ Scalaを使用している方々はほぼ全てのコードをScalaで書くで�
 
 この記事は2023/05/02時点での内容です。
 
+`compileOrder`の話はしません。JavaもScalaも相互に参照している前提です。
+片方への参照がない場合は`JavaThenScala`か`ScalaThenJava`の適切な方を設定すれば正しくコンパイルされます。
+この記事では`compileOrder := CompileOrder.Mixed`の設定です。
+
 # 環境
 
 ## Java
