@@ -337,6 +337,10 @@ Sealed classはInterfaceであっても同じ結果となります。
 
 ## 備考
 
+### 動作確認のリポジトリ
+
+https://github.com/k-kojima-yumemi/stunning-octo-chainsaw
+
 ### 2.13
 
 * Sealed Classes
