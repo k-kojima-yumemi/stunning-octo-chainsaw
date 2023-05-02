@@ -9,25 +9,19 @@ Scalaを使用している方々はほぼ全てのコードをScalaで書くで�
 ## Java
 
 ```shell
-java --version
+$ java --version
+openjdk 17.0.7 2023-04-18
+OpenJDK Runtime Environment Temurin-17.0.7+7 (build 17.0.7+7)
+OpenJDK 64-Bit Server VM Temurin-17.0.7+7 (build 17.0.7+7, mixed mode)
 ```
-
-> ```
-> openjdk 17.0.7 2023-04-18
-> OpenJDK Runtime Environment Temurin-17.0.7+7 (build 17.0.7+7)
-> OpenJDK 64-Bit Server VM Temurin-17.0.7+7 (build 17.0.7+7, mixed mode)
-> ```
 
 ## SBT
 
 ```shell
-sbt --version
+$ sbt --version
+sbt version in this project: 1.8.2
+sbt script version: 1.8.2
 ```
-
-> ```
-> sbt version in this project: 1.8.2
-> sbt script version: 1.8.2
-> ```
 
 ## Scala
 
