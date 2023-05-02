@@ -4,6 +4,8 @@ Scalaを使用している方々はほぼ全てのコードをScalaで書くで�
 しかしBetter JavaとしてScalaを使っている人には、時にJavaのライブラリの制約によってJavaをScalaのプロジェクトに入れなければならない場合があります。
 そのような場合に、Javaの最近導入された機能たちがScala環境でコンパイルできるかを検証します。
 
+この記事は2023/05/02時点での内容です。
+
 # 環境
 
 ## Java
@@ -235,7 +237,7 @@ public class TextBlock {
 
 </div></details>
 
-<details><summary>呼び出し元</summary><div>
+### 呼び出し元
 
 ```scala
 
@@ -266,9 +268,55 @@ object CompileCheckMain {
 
 ```
 
-</div></details>
-
 # 結果
+
+## 実行結果
+
+### 2.13.10
+
+コンパイルできない部分(sealed class)はコード上でコメントアウトして実行しています。
+
+```
+----------RecordExample----------
+RecordExample[pos=Position(0,0)]
+----------HasPrivate----------
+8.0
+----------PatternMatch----------
+Position(23,29)
+----------ScalaSealedClass----------
+class jp.co.yumemi.koma.ScalaSealedClass$Child1
+class jp.co.yumemi.koma.ScalaSealedClass$Child2
+class jp.co.yumemi.koma.ScalaSealedClass$Child3
+----------SwitchExpression----------
+Count: 2
+Work
+----------TextBlock----------
+This is an example of multi line string.
+This file may be called from scala file.
+```
+
+### 3.2.2
+
+コンパイルできない部分(recode, sealed class)はコード上でコメントアウトして実行しています。
+
+```
+----------HasPrivate----------
+8.0
+----------PatternMatch----------
+Position(23,29)
+----------ScalaSealedClass----------
+class jp.co.yumemi.koma.ScalaSealedClass$Child1
+class jp.co.yumemi.koma.ScalaSealedClass$Child2
+class jp.co.yumemi.koma.ScalaSealedClass$Child3
+----------SwitchExpression----------
+Count: 2
+Work
+----------TextBlock----------
+This is an example of multi line string.
+This file may be called from scala file.
+```
+
+## まとめ
 
 | Function                          | 2.13.10 | 3.2.2 |
 |-----------------------------------|:-------:|:-----:|
