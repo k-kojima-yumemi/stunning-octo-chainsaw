@@ -133,7 +133,7 @@ Both are now ✅.
   Features which appear at declaration level (`sealed`, `permits`, `non-sealed`, `record`, `import module`)
   need explicit support from the Scala side.
 * Scala side pattern matching over a Java sealed hierarchy (`SealedInterface`)
-  * Exhaustiveness check works in 2.13.18 and 3.9.0 (dropping `case o: SealedInterface.Other` emits "match may not be exhaustive").
+  * Exhaustiveness check works in 2.13.18 and 3.9.0 (dropping `case o: SealedInterface.Other` in `UseJavaFromScala.scala` emits "match may not be exhaustive").
   * 3.3.8 does not emit the warning. The check arrived in https://github.com/scala/scala3/pull/25788 (3.9.0).
 * Java records can be used from Scala in all three versions (`RecordPattern.Point`, `SealedInterface.Circle`).
   Deconstructing Java records in Scala pattern matching (`case Point(x, y) =>`) is planned for Scala 3.10.0
