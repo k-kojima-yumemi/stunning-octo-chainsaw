@@ -79,7 +79,7 @@ Preview features which have not been finalized by Java 25 (primitive types in pa
 ### Environment
 
 * Java: Temurin 25.0.4.1 (JEP 511 and 513 need Java 25)
-* sbt: 1.13.0
+* sbt: 2.0.10
 * Scala
   * 2.13.18
   * 3.9.0
