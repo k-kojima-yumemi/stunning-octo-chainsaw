@@ -78,7 +78,7 @@ Java 26 と 27 も確認しましたが、言語機能の変更はありませ�
 
 Java 17 までの機能 (`var`、Records、Sealed Classes、Switch Expressions、Text Blocks など) も同じリポジトリで一緒に再実行しています。
 コードはリポジトリを参照してください。
-sealed interface と、前回は検証コードに含めていなかった inner class 内の static メンバーは、今回コード欄に載せます。
+sealed interface と、前回は検証コードに含めていなかった inner class 内の static メンバーも今回コード欄に載せています。
 
 ## 参考
 
