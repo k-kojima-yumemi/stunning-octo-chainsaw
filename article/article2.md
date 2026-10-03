@@ -629,7 +629,6 @@ Sealed interface についても同様にコンパイル可能です。
 
 今回の範囲でコンパイルできなかったのは Module Import Declarations (`import module java.base;`) だけです。
 javac 自体はこの構文を受け付けます。
-`Mixed` では scalac / dotty も Java ソースを読んでシグネチャを取るため、そのパーサが知らない構文で落ちます。
 `sealed`、`permits`、`non-sealed`、`record`、`import module` のように宣言に現れる構文は、Scala 側の対応が必要です。
 
 Scala から Java の sealed 型を `match` したときの網羅性チェックは、2.13.18 と 3.9.0 では警告が出ます。
