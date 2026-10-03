@@ -4,16 +4,22 @@ Scalaを使用している方々はほぼ全てのコードをScalaで書くで�
 しかしBetter JavaとしてScalaを使っている人には、時にJavaのライブラリの制約によってJavaをScalaのプロジェクトに入れなければならない場合があります。
 そのような場合に、Javaの最近導入された機能たちがScala環境でコンパイルできるかを検証します。
 
-前回は Java 17 までに入った言語機能を、Scala 2.13.10 と 3.2.2 で確認しました。
-あれから Java も Scala も進んだので、Java 18 から 25 までに正式化された言語機能を、同じ前提でもう一度確認します。
+Java 18 から 25 までに正式化された言語機能を、Scala 2.13.18, 3.3.8(LTS), 3.9.0で検証します。Javaは25です。
 
 この記事は2026/10/03時点での内容です。
 
-前回の記事は [Javaの新しいシンタックスはScalaでコンパイルできるのか](https://qiita.com/k-kojima-yumemi/items/6d6eed3c9567bc56864a) です。
+前回Java 17までの確認をしており、記事は [Javaの新しいシンタックスはScalaでコンパイルできるのか](https://qiita.com/k-kojima-yumemi/items/6d6eed3c9567bc56864a) です。
 
 `compileOrder`の話はしません。JavaもScalaも相互に参照している前提です。
 片方への参照がない場合は`JavaThenScala`か`ScalaThenJava`の適切な方を設定すれば正しくコンパイルされます。
 この記事では`compileOrder := CompileOrder.Mixed`の設定です。
+
+:::note info
+
+* この記事は95%AIが生成しています。生成後人手でレビューし気になった5%を修正しています
+* コードもAI生成で、レビューを行った後に動作確認をしています
+
+:::
 
 # 環境
 
@@ -472,6 +478,8 @@ object UseJavaFromScala {
 }
 ```
 
+matchによるパターンマッチで、sealedの網羅性チェックが2.13.18と3.9.0でなされます。
+
 </div></details>
 
 ### 呼び出し元
@@ -617,15 +625,11 @@ Rectangle(Position(0,0), Position(1,1)) => rectangle Position(0,0) - Position(1,
 | Module Import Declarations                 |    ❌    |   ❌   |   ❌   |
 | Flexible Constructor Bodies                |    ✅    |   ✅   |   ✅   |
 
-前回 3.2.2 でコンパイルできなかった Records と、2.13.10 と 3.2.2 の両方でコンパイルできなかった Sealed Classes は、今回のバージョンではコンパイルできました。
+前回の記事にて 3.2.2 でコンパイルできなかった Records と、 Sealed Classes は、今回のバージョンではコンパイルできました。
 Sealed interface でも同じです。
 
 今回の範囲でコンパイルできなかったのは Module Import Declarations (`import module java.base;`) だけです。
 javac 自体はこの構文を受け付けます。
-失敗しているのは、`Mixed` のとき scalac と dotty がシグネチャを取るために Java ソースを読むパーサです。
-
-メソッド本体の中だけで完結する構文 (switch のパターン、record パターン、`_`、`super()` の前の文) は、このパーサが読み飛ばします。
-そのため javac が対応していれば通ります。
 `sealed`、`permits`、`non-sealed`、`record`、`import module` のように宣言に現れる構文は、Scala 側の対応が必要です。
 
 Scala から Java の sealed 型を `match` したときの網羅性チェックは、2.13.18 と 3.9.0 では警告が出ます。
