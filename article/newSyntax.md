@@ -82,29 +82,28 @@ Preview features which have not been finalized by Java 25 (primitive types in pa
 * sbt: 1.13.0
 * Scala
   * 2.13.18
-  * 3.3.8 (LTS)
   * 3.9.0
 * `compileOrder := CompileOrder.Mixed`
 
 ### Summary
 
-| Java | Function                                   | File                       | 2.13.18 | 3.3.8 | 3.9.0 |
-|-----:|--------------------------------------------|----------------------------|:-------:|:-----:|:-----:|
-|   10 | `var`                                      | `PatternMatch.java` etc.   |    ✅    |   ✅   |   ✅   |
-|    9 | private method in interface                | `HasPrivate.java`          |    ✅    |   ✅   |   ✅   |
-|   16 | Pattern Matching for `instanceof`          | `PatternMatch.java`        |    ✅    |   ✅   |   ✅   |
-|   16 | Records                                    | `RecordExample.java`       |    ✅    |   ✅   |   ✅   |
-|   16 | static members in inner class              | `StaticInInner.java`       |    ✅    |   ✅   |   ✅   |
-|   17 | Sealed Classes (class, implicit permits)   | `SealedExample.java`       |    ✅    |   ✅   |   ✅   |
-|   17 | Sealed Classes (interface, `permits`)      | `SealedInterface.java`     |    ✅    |   ✅   |   ✅   |
-|   14 | Switch Expressions                         | `SwitchExpression.java`    |    ✅    |   ✅   |   ✅   |
-|   15 | Text Blocks                                | `TextBlock.java`           |    ✅    |   ✅   |   ✅   |
-|   21 | Record Patterns                            | `RecordPattern.java`       |    ✅    |   ✅   |   ✅   |
-|   21 | Pattern Matching for `switch`              | `SwitchPattern.java`       |    ✅    |   ✅   |   ✅   |
-|   22 | Unnamed Variables & Patterns               | `UnnamedVariable.java`     |    ✅    |   ✅   |   ✅   |
-|   23 | Markdown Documentation Comments            | `MarkdownDoc.java`         |    ✅    |   ✅   |   ✅   |
-|   25 | Module Import Declarations                 | `ModuleImport.java`        |    ❌    |   ❌   |   ❌   |
-|   25 | Flexible Constructor Bodies                | `FlexibleConstructor.java` |    ✅    |   ✅   |   ✅   |
+| Java | Function                                   | File                       | 2.13.18 | 3.9.0 |
+|-----:|--------------------------------------------|----------------------------|:-------:|:-----:|
+|   10 | `var`                                      | `PatternMatch.java` etc.   |    ✅    |   ✅   |
+|    9 | private method in interface                | `HasPrivate.java`          |    ✅    |   ✅   |
+|   16 | Pattern Matching for `instanceof`          | `PatternMatch.java`        |    ✅    |   ✅   |
+|   16 | Records                                    | `RecordExample.java`       |    ✅    |   ✅   |
+|   16 | static members in inner class              | `StaticInInner.java`       |    ✅    |   ✅   |
+|   17 | Sealed Classes (class, implicit permits)   | `SealedExample.java`       |    ✅    |   ✅   |
+|   17 | Sealed Classes (interface, `permits`)      | `SealedInterface.java`     |    ✅    |   ✅   |
+|   14 | Switch Expressions                         | `SwitchExpression.java`    |    ✅    |   ✅   |
+|   15 | Text Blocks                                | `TextBlock.java`           |    ✅    |   ✅   |
+|   21 | Record Patterns                            | `RecordPattern.java`       |    ✅    |   ✅   |
+|   21 | Pattern Matching for `switch`              | `SwitchPattern.java`       |    ✅    |   ✅   |
+|   22 | Unnamed Variables & Patterns               | `UnnamedVariable.java`     |    ✅    |   ✅   |
+|   23 | Markdown Documentation Comments            | `MarkdownDoc.java`         |    ✅    |   ✅   |
+|   25 | Module Import Declarations                 | `ModuleImport.java`        |    ❌    |   ❌   |
+|   25 | Flexible Constructor Bodies                | `FlexibleConstructor.java` |    ✅    |   ✅   |
 
 In the original article (2023/05/02, 2.13.10 / 3.2.2) Records were ❌ in 3.2.2 and Sealed Classes were ❌ in both.
 Both are now ✅.
@@ -120,7 +119,7 @@ Both are now ✅.
     [error] import module java.base;
     [error]               ^
     ```
-  * 3.3.8 / 3.9.0
+  * 3.9.0
     ```
     [error] -- Error: ModuleImport.java:4:14 ---
     [error] 4 |import module java.base;
@@ -133,10 +132,9 @@ Both are now ✅.
   Features which appear at declaration level (`sealed`, `permits`, `non-sealed`, `record`, `import module`)
   need explicit support from the Scala side.
 * Scala side pattern matching over a Java sealed hierarchy (`SealedInterface`)
-  * Exhaustiveness check works in 2.13.18 and 3.9.0 (a missing case emits "match may not be exhaustive").
-  * 3.3.8 does not emit the warning.
+  * Exhaustiveness check works in both 2.13.18 and 3.9.0 (a missing case emits "match may not be exhaustive").
   * Scala 3: https://github.com/scala/scala3/pull/25788 (3.9.0)
-* Java records can be used from Scala in all the versions (`RecordPattern.Point`, `SealedInterface.Circle`).
+* Java records can be used from Scala in both versions (`RecordPattern.Point`, `SealedInterface.Circle`).
   Deconstructing Java records in Scala pattern matching (`case Point(x, y) =>`) is planned for Scala 3.10.0
   (https://github.com/scala/scala3/pull/26497), not checked here.
 

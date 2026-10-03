@@ -14,7 +14,7 @@ object CompileCheckMain {
     section("RecordExample")(RecordExample.main(args))
     section("HasPrivate")(HasPrivate.main(args))
     section("PatternMatch")(PatternMatch.main(args))
-    // Compile error in 2.13.10 and 3.2.2, works in 2.13.18, 3.3.8 and 3.9.0
+    // Compile error in 2.13.10 and 3.2.2, works in 2.13.18 and 3.9.0
     section("SealedExample")(SealedExample.main(args))
     section("SealedInterface")(SealedInterface.main(args))
     section("ScalaSealedClass")(ScalaSealedClass.main(args))
@@ -30,7 +30,7 @@ object CompileCheckMain {
     // Java 23
     section("MarkdownDoc")(MarkdownDoc.main(args))
     // Java 25
-    // Compile error in 2.13.18, 3.3.8 and 3.9.0
+    // Compile error in 2.13.18 and 3.9.0
     // section("ModuleImport")(ModuleImport.main(args))
     section("FlexibleConstructor")(FlexibleConstructor.main(args))
 
