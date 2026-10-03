@@ -8,11 +8,11 @@ object CompileCheckMain {
   }
 
   def main(args: Array[String]): Unit = {
-    // Java 9 - 17 (checked in the original article with 2.13.10 / 3.2.2)
+    // Java 9 - 17
     section("RecordExample")(RecordExample.main(args))
     section("HasPrivate")(HasPrivate.main(args))
     section("PatternMatch")(PatternMatch.main(args))
-    // Compile error in 2.13.10 and 3.2.2, works in 2.13.18, 3.3.8 and 3.9.0
+    // Did not compile on 2.13.10 and 3.2.2. Compiles on 2.13.18, 3.3.8 and 3.9.0
     section("SealedExample")(SealedExample.main(args))
     section("SealedInterface")(SealedInterface.main(args))
     section("ScalaSealedClass")(ScalaSealedClass.main(args))

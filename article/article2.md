@@ -2,13 +2,13 @@
 
 Scalaを使用している方々はほぼ全てのコードをScalaで書くでしょう。
 しかしBetter JavaとしてScalaを使っている人には、時にJavaのライブラリの制約によってJavaをScalaのプロジェクトに入れなければならない場合があります。
-そのような場合に、Javaの最近導入された機能たちがScala環境でコンパイルできるかを検証します。
+そのような場合に、Javaに最近導入された機能がScala環境でコンパイルできるかを検証します。
 
-Java 18 から 25 までに正式化された言語機能を、Scala 2.13.18, 3.3.8(LTS), 3.9.0で検証します。Javaは25です。
+Java 18 から 25 までに正式化された言語機能を、Scala 2.13.18, 3.3.8 (LTS), 3.9.0 で検証します。本記事でベースとする Java のバージョンは 25 です。
 
 この記事は2026/10/03時点での内容です。
 
-前回Java 17までの確認をしており、記事は [Javaの新しいシンタックスはScalaでコンパイルできるのか](https://qiita.com/k-kojima-yumemi/items/6d6eed3c9567bc56864a) です。
+Java 17 までは前回の記事 [Javaの新しいシンタックスはScalaでコンパイルできるのか](https://qiita.com/k-kojima-yumemi/items/6d6eed3c9567bc56864a) で確認しています。
 
 `compileOrder`の話はしません。JavaもScalaも相互に参照している前提です。
 片方への参照がない場合は`JavaThenScala`か`ScalaThenJava`の適切な方を設定すれば正しくコンパイルされます。
@@ -76,10 +76,9 @@ Java 26 と 27 も確認しましたが、言語機能の変更はありませ�
 
 各機能の詳細は省きます。
 
-前回コンパイルできなかった Records と Sealed Classes も、同じリポジトリで再実行しています。
-前回はコードが無かった、inner class 内の static メンバーも確認しました。
-Sealed class に加えて、`permits` を書く sealed interface も足しています。
-これらのコードはリポジトリと前回の記事を参照してください。sealed interface と inner class の static メンバーだけ、今回のコード欄に載せます。
+Java 17 までの機能 (`var`、Records、Sealed Classes、Switch Expressions、Text Blocks など) も同じリポジトリで一緒に再実行しています。
+コードはリポジトリを参照してください。
+sealed interface と、前回は検証コードに含めていなかった inner class 内の static メンバーは、今回コード欄に載せます。
 
 ## 参考
 
@@ -495,11 +494,11 @@ object CompileCheckMain {
   }
 
   def main(args: Array[String]): Unit = {
-    // Java 9 - 17 (checked in the original article with 2.13.10 / 3.2.2)
+    // Java 9 - 17
     section("RecordExample")(RecordExample.main(args))
     section("HasPrivate")(HasPrivate.main(args))
     section("PatternMatch")(PatternMatch.main(args))
-    // Compile error in 2.13.10 and 3.2.2, works in 2.13.18, 3.3.8 and 3.9.0
+    // Did not compile on 2.13.10 and 3.2.2. Compiles on 2.13.18, 3.3.8 and 3.9.0
     section("SealedExample")(SealedExample.main(args))
     section("SealedInterface")(SealedInterface.main(args))
     section("ScalaSealedClass")(ScalaSealedClass.main(args))
@@ -625,11 +624,12 @@ Rectangle(Position(0,0), Position(1,1)) => rectangle Position(0,0) - Position(1,
 | Module Import Declarations                 |    ❌    |   ❌   |   ❌   |
 | Flexible Constructor Bodies                |    ✅    |   ✅   |   ✅   |
 
-前回の記事にて 3.2.2 でコンパイルできなかった Records と、 Sealed Classes は、今回のバージョンではコンパイルできました。
-Sealed interface でも同じです。
+Records と Sealed Classes は前回の記事の時点ではコンパイルできないバージョンがありましたが、今回の 3 バージョンではすべてコンパイルできました。
+Sealed interface についても同様にコンパイル可能です。
 
 今回の範囲でコンパイルできなかったのは Module Import Declarations (`import module java.base;`) だけです。
 javac 自体はこの構文を受け付けます。
+`Mixed` では scalac / dotty も Java ソースを読んでシグネチャを取るため、そのパーサが知らない構文で落ちます。
 `sealed`、`permits`、`non-sealed`、`record`、`import module` のように宣言に現れる構文は、Scala 側の対応が必要です。
 
 Scala から Java の sealed 型を `match` したときの網羅性チェックは、2.13.18 と 3.9.0 では警告が出ます。
