@@ -1,10 +1,11 @@
 ThisBuild / organization := "jp.co.yumemi.koma"
 
 val scala2Version = "2.13.18"
+val scala3LtsVersion = "3.3.8"
 val scala3Version = "3.9.0"
 
 ThisBuild / scalaVersion := scala2Version
-ThisBuild / crossScalaVersions := Seq(scala2Version, scala3Version)
+ThisBuild / crossScalaVersions := Seq(scala2Version, scala3LtsVersion, scala3Version)
 
 lazy val pro = (project in file("."))
   .settings(
